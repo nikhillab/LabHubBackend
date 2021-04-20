@@ -3,8 +3,14 @@ package com.labhub;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import com.labhub.fileservice.FileStorageProperties;
 
 @SpringBootApplication
+@EnableJpaRepositories
+@EnableConfigurationProperties({ FileStorageProperties.class })
 public class LabHubApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
@@ -13,7 +19,6 @@ public class LabHubApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("Refreshed");
 		
 	}

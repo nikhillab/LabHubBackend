@@ -6,13 +6,13 @@ package com.labhub.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.labhub.Entity.AssignmentFile;
+import com.labhub.Entity.AssignmentText;
 
 /**
  * @author nikhil
  *
  */
 @Repository
-public interface AssignmentFileRepo extends JpaRepository<AssignmentFile, Long> {
+public interface AssignmentTextRepo extends JpaRepository<AssignmentText, Long> {
 
 }

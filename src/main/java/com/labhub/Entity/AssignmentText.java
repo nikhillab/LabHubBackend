@@ -1,11 +1,13 @@
 /**
  * 
  */
-package com.labhubEntity;
+package com.labhub.Entity;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -17,30 +19,19 @@ import javax.persistence.Id;
 public class AssignmentText {
 
 	@Id
-	private Long assignentTextId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long assignmentTextId;
 	private String name;
 	private String description;
 	private Date targetDate;
 	private String code;
+	private String userName;
 
 	public AssignmentText() {
 
 	}
-
-	public AssignmentText(Long assignentTextId, String name, String description, Date targetDate, String code) {
-		this.assignentTextId = assignentTextId;
-		this.name = name;
-		this.description = description;
-		this.targetDate = targetDate;
-		this.code = code;
-	}
-
-	public Long getAssignentTextId() {
-		return assignentTextId;
-	}
-
-	public void setAssignentTextId(Long assignentTextId) {
-		this.assignentTextId = assignentTextId;
+	public Long getAssignmentTextId() {
+		return assignmentTextId;
 	}
 
 	public String getName() {
@@ -75,10 +66,13 @@ public class AssignmentText {
 		this.code = code;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("AssignentText [assignentTextId=%s, name=%s, description=%s, targetDate=%s, code=%s]",
-				assignentTextId, name, description, targetDate, code);
+	public String getUserName() {
+		return userName;
 	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 
 }

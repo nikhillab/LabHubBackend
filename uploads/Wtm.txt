@@ -1,0 +1,97 @@
+Q1  In Java the type of a variable is checked at compile-time JavaScript is weakly typed language and have more relaxed syntax and rules.
+    Java is an object oriented programming language.	JavaScript is an object based scripting language
+    Java applications can run in any virtual machine(JVM) or browser.	JavaScript code used to run only in browser.
+    Java is both compiled and intereprate JavaScript is only intereprated.
+
+Q2  It is platform independent because it is interpreted and we just need to have interpreter for executing JavaScript
+     code on any platform. 
+
+Q3  Objects of JavaScript are windows and document 
+    methods are 
+    Methods	Description
+    Alert ()	It displays the popup messages 
+    Confirm ()	It displays the message on the alert box
+    Prompt ()	It gets input from the user
+    getElementById()	Returns the element that has the ID attribute with the specified value
+    getElementsByClassName()	Returns a HTMLCollection containing all elements with the specified class name
+    getElementsByName()	Returns a HTMLCollection containing all elements with a specified name
+    getElementsByTagName()
+
+Q4  The alert() dialog box is used to communicate a message to the user (generally warnings of missed actions).
+     For example, if the email address entered is wrong, you can use the alert() message to warn the user about it.
+     The confirm dialog box is used to confirm a user’s answer to a question. This method takes only one argument, 
+     the question you will ask the user. A question mark will appear in the box with an OK button and a
+      Cancel button. If the user clicks the OK button, true is returned else false is returned.
+
+Q5  <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Find In JavaScript</title>
+        </head>
+        <body>
+            <form>
+                Enter your name:
+                <input type="text" name="yourname" value="gsjg"> <br> <br>
+                Enter Password: 
+                <input type="password" name="yourpassword" value="khsh"> <br> <br>
+                <input type="submit" name="submit" value="Register">
+            </form>
+            <input type="button" onclick="value_show()">
+        
+            <script type="text/javascript">
+                    function value_show(){
+                    var number_elements=document.forms[0].elements[0].value;
+                    document.write(number_elements);
+                }
+            </script>
+        </body>
+    </html>      
+
+Q6 document.write () will print the contents of the parameter passed to it to the current node at execution time.
+
+Q The setTimeout () method in JavaScript is used to execute a function after waiting for the specified time interval. 
+    This method returns a numeric value that represents the ID value of the timer.
+
+Q   The location object is part of the window object and is accessed through the window.location property.
+    The location object contains information about the current URL.
+
+Q       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        var cookiearray = document.cookie.split(';');
+        for(var i=0; i<cookiearray.length; i++) {
+            name = cookiearray[i].split('=')[0];
+            value = cookiearray[i].split('=')[1];
+            document.write ("Key is : " + name + " and Value is : " + value);
+        }
+
+Q   The window object represents an open window in a browser. If a document contain frames (<iframe> tags),
+    the browser creates one window object for the HTML document, and one additional window object for each frame.
+    A Document object represents the HTML document that is displayed in that window. The Document object has 
+    various properties that refer to other objects which allow access to and modification of document content.    
+
+    Next questions answers are present in ppts in classroom
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

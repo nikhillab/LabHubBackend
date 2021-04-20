@@ -1,7 +1,15 @@
 package com.labhub.fileservice;
 
-public class FileResponse {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class FileResponse {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long fileId;
 	private String filename;
 	private String fileDownloadUri;
 	private String fileType;
@@ -17,6 +25,10 @@ public class FileResponse {
 		this.fileDownloadUri = fileDownloadUri;
 		this.fileType = fileType;
 		this.size = size;
+	}
+
+	public Long getFileId() {
+		return fileId;
 	}
 
 	public String getFilename() {
@@ -53,8 +65,10 @@ public class FileResponse {
 
 	@Override
 	public String toString() {
-		return String.format("FileResponse [filename=%s, fileDownloadUri=%s, fileType=%s, size=%s]", filename,
-				fileDownloadUri, fileType, size);
+		return String.format("FileResponse [fileId=%s, filename=%s, fileDownloadUri=%s, fileType=%s, size=%s]", fileId,
+				filename, fileDownloadUri, fileType, size);
 	}
+
+	
 
 }

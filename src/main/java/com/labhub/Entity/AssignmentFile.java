@@ -1,12 +1,16 @@
 /**
  * 
  */
-package com.labhubEntity;
+package com.labhub.Entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.labhub.fileservice.FileResponse;
 
@@ -16,34 +20,30 @@ import com.labhub.fileservice.FileResponse;
  */
 @Entity
 public class AssignmentFile {
+
 	@Id
-	private Long assignentFileId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long assignmentFileId;
 	private String name;
 	private String description;
 	private Date targetDate;
+	@OneToOne
 	private FileResponse fileResponse;
+	private String userName;
 
 	public AssignmentFile() {
-		super();
 	}
-	
 
-	public AssignmentFile(Long assignentFileId, String name, String description, Date targetDate,
-			FileResponse fileResponse) {
-		this.assignentFileId = assignentFileId;
+	public AssignmentFile( String name, String description, Date targetDate,
+			FileResponse fileResponse, String userName) {
 		this.name = name;
 		this.description = description;
 		this.targetDate = targetDate;
 		this.fileResponse = fileResponse;
+		this.setUserName(userName);
 	}
-
-
-	public Long getAssignentFileId() {
-		return assignentFileId;
-	}
-
-	public void setAssignentFileId(Long assignentFileId) {
-		this.assignentFileId = assignentFileId;
+	public Long getAssignmentFileId() {
+		return assignmentFileId;
 	}
 
 	public String getName() {
@@ -78,12 +78,14 @@ public class AssignmentFile {
 		this.fileResponse = fileResponse;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"AssignmentFile [assignentFileId=%s, name=%s, description=%s, targetDate=%s, fileResponse=%s]",
-				assignentFileId, name, description, targetDate, fileResponse);
+	public String getUserName() {
+		return userName;
 	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	
 
 }

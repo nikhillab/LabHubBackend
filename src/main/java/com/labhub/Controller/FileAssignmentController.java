@@ -1,77 +1,74 @@
-/**
- * 
- */
 package com.labhub.Controller;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.labhub.repo.AssignmentDemo;
-import com.labhubEntity.AssignmentFile;
-import com.labhubEntity.AssignmentText;
+import com.labhub.Entity.AssignmentFile;
+import com.labhub.Entity.AssignmentText;
+import com.labhub.repo.AssignmentFileRepo;
+import com.labhub.repo.FileResposeRepo;
 
 /**
- * @author nikhil
- *
+ * @author nikhil All file related controllers are from here
  */
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class AssignmentController {
+public class FileAssignmentController {
 
-	private AssignmentDemo assignmentRepo;
+	private AssignmentFileRepo fileRepo;
+	private FileResposeRepo fileResposeRepo;
 
-	public AssignmentController(AssignmentDemo assignmentRepo) {
-		this.assignmentRepo = assignmentRepo;
+	public FileAssignmentController(AssignmentFileRepo fileRepo) {
+		this.fileRepo = fileRepo;
 	}
 
-	/*
-	 * All Text related controllers are from here 
-	 * 
-	 * */
-	@GetMapping("/getTextAssignments")
-	public List<AssignmentText> getTextAssignments() {
-		return assignmentRepo.getTextList();
-	}
-
-	@PostMapping("/createText")
-	public ResponseEntity<AssignmentText> createTextAssignment(@RequestBody AssignmentText assignentText) {
-		var add = assignmentRepo.addText(assignentText);
-		return new ResponseEntity<AssignmentText>(add, HttpStatus.CREATED);
-
-	}
-	@GetMapping("/getTextAssignment/{id}")
-	public  ResponseEntity<AssignmentText> getTextAssignment(@PathVariable long id) {
-		var optional = assignmentRepo.getByID(id);
-		if(optional.isPresent()) {
-			return new ResponseEntity<AssignmentText>(optional.get(), HttpStatus.ACCEPTED);
-		}
-		return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-	}
-
-	/*
-	 * All file related controllers are from here 
-	 * 
-	 * */
-	
 	@GetMapping("/getFileAssignments")
 	public List<AssignmentFile> getFilessignments() {
-		return assignmentRepo.getFileList();
+		return fileRepo.findAll();
+	}
+
+	@GetMapping("/getFileAssignment/{id}")
+	public ResponseEntity<AssignmentFile> getFilessignmentById(@PathVariable long id) {
+		Optional<AssignmentFile> optional = fileRepo.findById(id);
+		if (optional.isPresent()) {
+			return new ResponseEntity<AssignmentFile>(optional.get(), HttpStatus.ACCEPTED);
+		}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
 	}
 
 	@PostMapping("/createFile")
 	public ResponseEntity<AssignmentFile> createFileAssignment(@RequestBody AssignmentFile assignentFile) {
-		var file = assignmentRepo.addFile(assignentFile);
+		var file = fileRepo.save(assignentFile);
 		return new ResponseEntity<AssignmentFile>(file, HttpStatus.CREATED);
 
+	}
+
+	@DeleteMapping("/deleteFile/{id}")
+	public ResponseEntity<Boolean> deleteFile(@PathVariable long id) {
+		Optional<AssignmentFile> findById = fileRepo.findById(id);
+		if (findById.isEmpty())
+			return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+		AssignmentFile entity = findById.get();
+		fileRepo.delete(entity);
+		fileResposeRepo.delete(entity.getFileResponse());
+		return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+
+	}
+
+	@Autowired
+	public void setFileResposeRepo(FileResposeRepo fileResposeRepo) {
+		this.fileResposeRepo = fileResposeRepo;
 	}
 }
