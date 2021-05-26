@@ -18,14 +18,13 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest()
-		.authenticated().and()
-		.httpBasic();
+				.authenticated().and().httpBasic();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()).withUser("nikhil@gmail.com")
-				.password("nikhil").roles("USER");
+				.password("nikhil").roles("USER").and().withUser("kunal@gmail.com").password("kunal").roles("USER");
 	}
 }

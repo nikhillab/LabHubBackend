@@ -33,9 +33,10 @@ public class FileAssignmentController {
 		this.fileRepo = fileRepo;
 	}
 
-	@GetMapping("/getFileAssignments")
-	public List<AssignmentFile> getFilessignments() {
-		return fileRepo.findAll();
+	@GetMapping("/getFileAssignments/{username}")
+	public List<AssignmentFile> getFilessignments(@PathVariable String username) {
+		List<AssignmentFile> findByUserName = fileRepo.findByUserName(username);
+		return findByUserName;
 	}
 
 	@GetMapping("/getFileAssignment/{id}")

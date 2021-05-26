@@ -29,14 +29,16 @@ public class TextAssignmentController {
 		this.textRepo = textRepo;
 	}
 
-	@GetMapping("/getTextAssignments")
-	public List<AssignmentText> getTextAssignments() {
-		return textRepo.findAll();
+	@GetMapping("/getTextAssignments/{username}")
+	public List<AssignmentText> getTextAssignments(@PathVariable String username) {
+		
+		List<AssignmentText> findByUserName = textRepo.findByUserName(username);
+		return findByUserName;
 	}
 
 	@PostMapping("/createText")
 	public ResponseEntity<AssignmentText> createTextAssignment(@RequestBody AssignmentText assignentText) {
-		//System.out.println(assignentText.getName());
+		// System.out.println(assignentText.getName());
 		var add = textRepo.save(assignentText);
 		return new ResponseEntity<AssignmentText>(add, HttpStatus.CREATED);
 
